@@ -13,4 +13,6 @@ import lombok.Setter;
 public class DepartmentRequest {
     @NotBlank(message = "Department name cannot be blank")
     private String name;
+    
+    private boolean isInternal = false;
 }

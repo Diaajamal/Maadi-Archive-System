@@ -25,9 +25,14 @@ public class DepartmentController {
 
     @Operation(summary = "Add a new department")
     @PostMapping("/add")
-    public ResponseEntity<String> addDepartment(@RequestParam String departmentName) {
-        logger.info("Adding department " + departmentName);
-        return departmentService.addDepartment(departmentName);
+    public ResponseEntity<String> addDepartment(
+            @RequestParam String departmentName,
+            @RequestParam(defaultValue = "false") boolean isInternal) {
+        logger.info("Adding department {} with isInternal={}", departmentName, isInternal);
+        if (departmentName == null || departmentName.isEmpty()) {
+            return ResponseEntity.badRequest().body("Department name cannot be empty");
+        }
+        return departmentService.addDepartment(departmentName, isInternal);
     }
 
     @Operation(summary = "Delete a department")
@@ -51,14 +56,27 @@ public class DepartmentController {
         return departmentService.getDepartmentByName(departmentName);
     }
 
-    @Operation(summary = "Get all department names")
-    @GetMapping("/all")
-    public ResponseEntity<List<String>> getAllDepartmentNames() {
-        logger.info("Getting all department names");
-        List<String> departmentNames = departmentService.getAllDepartmentNames();
-        if (departmentNames.isEmpty()) {
+    @Operation(summary = "Get all departments")
+    @GetMapping("/departments")
+    public ResponseEntity<List<Department>> getAllDepartments(
+            @RequestParam(required = false) Boolean isInternal) {
+        logger.info("Getting all departments with isInternal=" + isInternal);
+        List<Department> departments = departmentService.getDepartmentsByInternalStatus(isInternal);
+        logger.info("Found {} departments", departments.size());
+        if (departments.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(departmentNames);
+        return ResponseEntity.ok(departments);
+    }
+
+    @Operation(summary = "Get all department names")
+    @GetMapping("/all")
+    public ResponseEntity<List<Department>> getAllDepartmentNames() {
+        logger.info("Getting all department names");
+        List<Department> departments = departmentService.getAllDepartments();
+        if (departments.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(departments);
     }
 }

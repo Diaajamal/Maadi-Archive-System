@@ -17,4 +17,15 @@ public class Department {
     @Id
     @Column(nullable = false)
     private String name;
+
+    @Column(name = "is_internal", nullable = false)
+    private boolean isInternal;
+
+    public boolean getIsInternal() {
+        return isInternal;
+    }
+
+    public void setIsInternal(boolean isInternal) {
+        this.isInternal = isInternal;
+    }
 }

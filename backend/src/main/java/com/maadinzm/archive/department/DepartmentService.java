@@ -1,6 +1,8 @@
 package com.maadinzm.archive.department;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -12,13 +14,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DepartmentService {
     private final DepartmentRepository departmentRepository;
+    private final Logger logger = LogManager.getLogger(DepartmentService.class);
 
-    public ResponseEntity<String> addDepartment(String departmentName) {
+    public ResponseEntity<String> addDepartment(String departmentName, boolean isInternal) {
         if (isDepartmentExists(departmentName)) {
             return ResponseEntity.badRequest().body("Department already exists");
         }
         Department department = new Department();
         department.setName(departmentName);
+        department.setIsInternal(isInternal);
+        logger.info("Creating new department: name={}, isInternal={}", departmentName, isInternal);
         departmentRepository.save(department);
         return ResponseEntity.ok("Department added successfully");
     }
@@ -58,5 +63,16 @@ public class DepartmentService {
                 .stream()
                 .map(Department::getName)
                 .toList();
+    }
+
+    public List<Department> getDepartmentsByInternalStatus(Boolean isInternal) {
+        if (isInternal == null) {
+            return departmentRepository.findAll();
+        }
+        return departmentRepository.findByIsInternal(isInternal);
+    }
+
+    public List<Department> getAllDepartments() {
+        return departmentRepository.findAll();
     }
 }
