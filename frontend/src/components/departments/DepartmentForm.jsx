@@ -6,20 +6,34 @@ import { ERROR_MESSAGES } from '../../utils/constants';
 const DepartmentForm = () => {
   const { addDepartment, departments, loading } = useDepartments();
   
-  const [departmentName, setDepartmentName] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    isInternal: ''
+  });
   const [formError, setFormError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormError('');
+  };
   
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!departmentName.trim()) {
-      setFormError(ERROR_MESSAGES.FIELD_REQUIRED);
+    if (!formData.name.trim()) {
+      setFormError('يرجى إدخال اسم الجهة');
       return;
     }
     
-    if (departments.includes(departmentName.trim())) {
+    if (departments.some(dept => dept.name === formData.name.trim())) {
       setFormError(ERROR_MESSAGES.DEPARTMENT_EXISTS);
+      return;
+    }
+
+    if (!formData.isInternal) {
+      setFormError('يرجى اختيار نوع الجهة');
       return;
     }
     
@@ -27,10 +41,10 @@ const DepartmentForm = () => {
       setIsSubmitting(true);
       setFormError('');
       
-      const success = await addDepartment(departmentName.trim());
+      const success = await addDepartment(formData.name.trim(), formData.isInternal === 'true');
       
       if (success) {
-        setDepartmentName('');
+        setFormData({ name: '', isInternal: '' });
       } else {
         setFormError(ERROR_MESSAGES.GENERAL);
       }
@@ -54,19 +68,33 @@ const DepartmentForm = () => {
           )}
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="departmentName">إسم الجهة</label>
+              <label htmlFor="name">إسم الجهة</label>
               <input
                 type="text"
-                id="departmentName"
+                id="name"
+                name="name"
                 className="form-control"
-                value={departmentName}
-                onChange={(e) => {
-                  setDepartmentName(e.target.value);
-                  setFormError('');
-                }}
+                value={formData.name}
+                onChange={handleChange}
                 placeholder="إدخل اسم الجهة"
                 disabled={isSubmitting}
               />
+            </div>
+            <div className="form-group">
+              <label htmlFor="isInternal">نوع الجهة *</label>
+              <select
+                id="isInternal"
+                name="isInternal"
+                className="form-control"
+                value={formData.isInternal}
+                onChange={handleChange}
+                disabled={isSubmitting}
+              >
+                <option value="">اختر نوع الجهة</option>
+                <option value="true">داخلي</option>
+                <option value="false">خارجي</option>
+              </select>
+              <small className="form-text text-muted">داخلي/خارجي</small>
             </div>
             <button
               type="submit"
@@ -79,9 +107,50 @@ const DepartmentForm = () => {
         </div>
       </div>
       
-      <style jsx>{`
+      <style>{`
         .icon {
           margin-left: 5px;
+        }
+
+        @media (forced-colors: active) {
+          .department-form-card {
+            border: 1px solid CanvasText;
+          }
+          
+          .card-header {
+            border-bottom: 1px solid CanvasText;
+          }
+          
+          .card-header h2 {
+            color: CanvasText;
+          }
+          
+          .form-group label {
+            color: CanvasText;
+          }
+          
+          .form-control {
+            border: 1px solid CanvasText;
+            color: CanvasText;
+          }
+          
+          .form-text {
+            color: CanvasText;
+          }
+          
+          .btn-primary {
+            border: 1px solid CanvasText;
+            color: CanvasText;
+          }
+          
+          .btn-primary:hover {
+            color: LinkText;
+          }
+          
+          .alert-danger {
+            border: 1px solid CanvasText;
+            color: CanvasText;
+          }
         }
       `}</style>
     </div>

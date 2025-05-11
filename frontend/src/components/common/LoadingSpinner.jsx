@@ -29,6 +29,17 @@ const LoadingSpinner = () => {
             transform: rotate(360deg);
           }
         }
+
+        @media (forced-colors: active) {
+          .spinner {
+            border-color: CanvasText;
+            border-top-color: LinkText;
+          }
+          
+          .spinner-container p {
+            color: CanvasText;
+          }
+        }
       `}</style>
     </div>
   );

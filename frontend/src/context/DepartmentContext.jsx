@@ -16,8 +16,9 @@ export const DepartmentProvider = ({ children }) => {
       setLoading(true);
       setError(null);
       
-      const departmentNames = await departmentService.getAllDepartments();
-      setDepartments(departmentNames);
+      const departmentsData = await departmentService.getAllDepartments();
+      console.log('Fetched departments:', departmentsData);
+      setDepartments(departmentsData);
       
       setLoading(false);
     } catch (err) {
@@ -27,12 +28,16 @@ export const DepartmentProvider = ({ children }) => {
     }
   };
 
-  const addDepartment = async (departmentName) => {
+  const addDepartment = async (departmentName, isInternal) => {
     try {
       setLoading(true);
       setError(null);
       
-      await departmentService.addDepartment(departmentName);
+      // Convert string 'true'/'false' to boolean if needed
+      const isInternalBool = isInternal === 'true' || isInternal === true;
+      console.log('Adding department:', departmentName, 'isInternal:', isInternalBool);
+      
+      await departmentService.addDepartment(departmentName, isInternalBool);
       
       // Refresh departments
       await fetchDepartments();

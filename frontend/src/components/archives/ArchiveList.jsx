@@ -48,6 +48,7 @@ const ArchiveList = () => {
               <th>النوع</th>
               <th>التاريخ</th>
               <th>الجهة</th>
+              <th>نوع الجهة</th>
               <th>رقم الملف</th>
               <th>المرفقات</th>
             </tr>
@@ -71,7 +72,23 @@ const ArchiveList = () => {
                 <td>
                   <span className="department-wrapper">
                     <FaBuilding className="icon" />
-                    {archive.department}
+                    {(() => {
+                      if (!archive.department) return '';
+                      if (typeof archive.department === 'string') return archive.department;
+                      if (typeof archive.department === 'object') return archive.department.name || '';
+                      return '';
+                    })()}
+                  </span>
+                </td>
+                <td>
+                  <span className={`badge ${archive.department?.isInternal ? 'badge-primary' : 'badge-secondary'}`}>
+                    {(() => {
+                      if (!archive.department) return 'خارجي';
+                      if (typeof archive.department === 'object') {
+                        return archive.department.isInternal ? 'داخلي' : 'خارجي';
+                      }
+                      return 'خارجي';
+                    })()}
                   </span>
                 </td>
                 <td>
@@ -209,6 +226,53 @@ const ArchiveList = () => {
         .no-records {
           padding: 30px;
           text-align: center;
+        }
+
+        @media (forced-colors: active) {
+          .badge {
+            border: 1px solid CanvasText;
+          }
+          
+          .badge-incoming {
+            background-color: Canvas;
+            color: CanvasText;
+          }
+          
+          .badge-outgoing {
+            background-color: Canvas;
+            color: CanvasText;
+          }
+          
+          .icon {
+            color: CanvasText;
+          }
+          
+          .no-attachments {
+            color: CanvasText;
+          }
+          
+          .pagination-container button {
+            border: 1px solid CanvasText;
+            color: CanvasText;
+          }
+          
+          .pagination-container button:disabled {
+            border-color: GrayText;
+            color: GrayText;
+          }
+          
+          .pagination-info {
+            color: CanvasText;
+          }
+          
+          .spinner {
+            border-color: CanvasText;
+            border-left-color: LinkText;
+          }
+          
+          .no-records {
+            color: CanvasText;
+          }
         }
       `}</style>
     </div>

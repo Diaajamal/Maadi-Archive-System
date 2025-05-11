@@ -34,7 +34,7 @@ const archiveService = {
       formData.append('archiveNumber', archiveData.archiveNumber || 0);
       formData.append('fileNumber', archiveData.fileNumber || 0);
       formData.append('date', archiveData.date);
-      
+
       // Add files if present
       if (archiveData.files && archiveData.files.length) {
         archiveData.files.forEach(file => {

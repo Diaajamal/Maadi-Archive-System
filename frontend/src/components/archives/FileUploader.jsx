@@ -214,6 +214,51 @@ const FileUploader = ({ onFilesChange }) => {
         .btn-remove:hover {
           opacity: 0.8;
         }
+
+        @media (forced-colors: active) {
+          .drop-zone {
+            border: 2px dashed CanvasText;
+          }
+          
+          .drop-zone:hover {
+            border-color: LinkText;
+          }
+          
+          .upload-icon {
+            color: CanvasText;
+          }
+          
+          .selected-files h4 {
+            color: CanvasText;
+          }
+          
+          .file-item {
+            border: 1px solid CanvasText;
+          }
+          
+          .file-type {
+            border: 1px solid CanvasText;
+            background-color: Canvas;
+            color: CanvasText;
+          }
+          
+          .file-name {
+            color: CanvasText;
+          }
+          
+          .file-size {
+            color: CanvasText;
+          }
+          
+          .btn-remove {
+            border: 1px solid CanvasText;
+            color: CanvasText;
+          }
+          
+          .btn-remove:hover {
+            color: LinkText;
+          }
+        }
       `}</style>
     </div>
   );

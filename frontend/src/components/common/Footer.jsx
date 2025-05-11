@@ -20,6 +20,18 @@ const Footer = () => {
         .footer p {
           margin: 0;
         }
+
+        @media (forced-colors: active) {
+          .footer {
+            background-color: Canvas;
+            color: CanvasText;
+            border: 1px solid CanvasText;
+          }
+          
+          .footer p {
+            color: CanvasText;
+          }
+        }
       `}</style>
     </footer>
   );

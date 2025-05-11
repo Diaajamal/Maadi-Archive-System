@@ -114,6 +114,35 @@ const Sidebar = () => {
             padding: 10px;
           }
         }
+
+        @media (forced-colors: active) {
+          .sidebar {
+            border: 1px solid CanvasText;
+            background-color: Canvas;
+            color: CanvasText;
+          }
+          
+          .sidebar-header {
+            border-bottom: 1px solid CanvasText;
+          }
+          
+          .sidebar-nav a {
+            color: CanvasText;
+            border: 1px solid CanvasText;
+            margin: 2px;
+          }
+          
+          .sidebar-nav a:hover {
+            background-color: Canvas;
+            color: LinkText;
+          }
+          
+          .sidebar-nav a.active {
+            background-color: Canvas;
+            color: LinkText;
+            border: 2px solid CanvasText;
+          }
+        }
       `}</style>
     </aside>
   );

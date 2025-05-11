@@ -95,8 +95,8 @@ const ArchiveFilter = () => {
               >
                 <option value="">الكل</option>
                 {departments.map((dept, index) => (
-                  <option key={index} value={dept}>
-                    {dept}
+                  <option key={index} value={typeof dept === 'object' ? dept.name : dept}>
+                    {typeof dept === 'object' ? dept.name : dept}
                   </option>
                 ))}
               </select>
@@ -223,6 +223,20 @@ const ArchiveFilter = () => {
         @media (max-width: 768px) {
           .filter-grid {
             grid-template-columns: 1fr;
+          }
+        }
+
+        @media (forced-colors: active) {
+          .filter-container {
+            border: 1px solid CanvasText;
+          }
+          
+          .filter-header .icon {
+            forced-color-adjust: none;
+          }
+          
+          .btn {
+            border: 1px solid CanvasText;
           }
         }
       `}</style>

@@ -58,7 +58,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <h1 className="page-title">لوحة التحكم</h1>
+      <h1 className="page-title">الصفحة الرئيسية</h1>
       
       <div className="stats-grid">
         <div className="stat-card">

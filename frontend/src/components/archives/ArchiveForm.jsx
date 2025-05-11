@@ -1,5 +1,5 @@
 // src/components/archives/ArchiveForm.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaSave, FaTimes, FaUpload } from 'react-icons/fa';
 import { useArchives } from '../../context/ArchiveContext';
@@ -22,9 +22,22 @@ const ArchiveForm = () => {
     files: []
   });
   
+  const [isInternal, setIsInternal] = useState('');
+  const [filteredDepartments, setFilteredDepartments] = useState([]);
   const [errors, setErrors] = useState({});
   const [submitError, setSubmitError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  useEffect(() => {
+    if (Array.isArray(departments)) {
+      const filtered = departments.filter(dept => {
+        if (isInternal === '') return true;
+        const isInternalBool = isInternal === 'true';
+        return dept.isInternal === isInternalBool;
+      });
+      setFilteredDepartments(filtered);
+    }
+  }, [departments, isInternal]);
   
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -143,6 +156,26 @@ const ArchiveForm = () => {
               </div>
               
               <div className="form-group">
+                <label htmlFor="isInternal">نوع الجهة *</label>
+                <select
+                  id="isInternal"
+                  className="form-control"
+                  value={isInternal}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    console.log('Selected isInternal:', value);
+                    setIsInternal(value);
+                    setFormData(prev => ({ ...prev, department: '' }));
+                  }}
+                >
+                  <option value="">اختر نوع الجهة</option>
+                  <option value="true">داخلي</option>
+                  <option value="false">خارجي</option>
+                </select>
+                <small className="form-text text-muted">داخلي/خارجي</small>
+              </div>
+              
+              <div className="form-group">
                 <label htmlFor="department">الجهة *</label>
                 <select
                   id="department"
@@ -152,9 +185,9 @@ const ArchiveForm = () => {
                   onChange={handleChange}
                 >
                   <option value="">اختر الجهة</option>
-                  {departments.map((dept, index) => (
-                    <option key={index} value={dept}>
-                      {dept}
+                  {filteredDepartments.map((dept) => (
+                    <option key={dept.name} value={dept.name}>
+                      {dept.name} ({dept.isInternal ? 'داخلي' : 'خارجي'})
                     </option>
                   ))}
                 </select>

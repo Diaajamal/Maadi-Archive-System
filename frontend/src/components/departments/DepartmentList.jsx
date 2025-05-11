@@ -33,12 +33,17 @@ const DepartmentList = () => {
             </div>
           ) : (
             <ul className="departments-list">
-              {departments.map((dept, index) => (
-                <li key={index} className="department-item">
-                  <span className="department-name">{dept}</span>
+              {departments.map((dept) => (
+                <li key={dept.name} className="department-item">
+                  <div className="department-info">
+                    <span className="department-name">{dept.name}</span>
+                    <span className={`badge ${dept.isInternal ? 'badge-primary' : 'badge-secondary'}`}>
+                      {dept.isInternal ? 'داخلي' : 'خارجي'}
+                    </span>
+                  </div>
                   <button
                     className="btn btn-sm btn-danger"
-                    onClick={() => handleDelete(dept)}
+                    onClick={() => handleDelete(dept.name)}
                     disabled={loading}
                   >
                     <FaTrash /> حذف
@@ -50,7 +55,7 @@ const DepartmentList = () => {
         </div>
       </div>
       
-      <style jsx>{`
+      <style>{`
         .no-departments {
           text-align: center;
           padding: 30px;
@@ -90,6 +95,70 @@ const DepartmentList = () => {
           font-size: 0.875rem;
           line-height: 1.5;
           border-radius: 0.2rem;
+        }
+        
+        .department-info {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        
+        .badge {
+          padding: 0.25em 0.6em;
+          font-size: 0.75em;
+          font-weight: 500;
+          border-radius: 0.25rem;
+        }
+        
+        .badge-primary {
+          background-color: var(--primary-color);
+          color: white;
+        }
+        
+        .badge-secondary {
+          background-color: #6c757d;
+          color: white;
+        }
+
+        @media (forced-colors: active) {
+          .no-departments {
+            color: CanvasText;
+          }
+          
+          .empty-icon {
+            color: CanvasText;
+          }
+          
+          .department-item {
+            border-bottom: 1px solid CanvasText;
+          }
+          
+          .department-name {
+            color: CanvasText;
+          }
+          
+          .badge {
+            border: 1px solid CanvasText;
+          }
+          
+          .badge-primary {
+            background-color: Canvas;
+            color: CanvasText;
+          }
+          
+          .badge-secondary {
+            background-color: Canvas;
+            color: CanvasText;
+          }
+          
+          .btn-sm {
+            border: 1px solid CanvasText;
+            color: CanvasText;
+          }
+          
+          .btn-sm:hover {
+            color: LinkText;
+          }
         }
       `}</style>
     </div>

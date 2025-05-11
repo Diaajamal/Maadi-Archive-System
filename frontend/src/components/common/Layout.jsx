@@ -36,6 +36,16 @@ const Layout = ({ children }) => {
             flex-direction: column;
           }
         }
+
+        @media (forced-colors: active) {
+          .app-container {
+            border: 1px solid CanvasText;
+          }
+          
+          .content {
+            border: 1px solid CanvasText;
+          }
+        }
       `}</style>
     </div>
   );

@@ -107,6 +107,25 @@ const Header = () => {
             margin: 5px 10px;
           }
         }
+
+        @media (forced-colors: active) {
+          .header {
+            border: 1px solid CanvasText;
+            background-color: Canvas;
+          }
+          
+          .logo-text h1 {
+            color: CanvasText;
+          }
+          
+          .main-nav a {
+            color: CanvasText;
+          }
+          
+          .main-nav a:hover {
+            color: LinkText;
+          }
+        }
       `}</style>
     </header>
   );
