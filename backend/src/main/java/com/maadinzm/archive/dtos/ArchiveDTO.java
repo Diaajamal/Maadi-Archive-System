@@ -19,6 +19,7 @@ public class ArchiveDTO {
     private String type;
     private LocalDate date;
     private String department;
+    private Boolean isInternal;
     private String description;
     private int archiveNumber;
     private int fileNumber;
@@ -31,10 +32,11 @@ public class ArchiveDTO {
                 archive.getType() == ArchiveType.INCOMING ? "وارد" : "صادر",
                 archive.getDate(),
                 archive.getDepartment().getName(),
+                archive.getDepartment().getIsInternal(),
                 archive.getDescription(),
                 archive.getArchiveNumber(),
                 archive.getFileNumber(),
-                new ArrayList<>(archive.getFilePaths()) // eagerly load the collection
+                new ArrayList<>(archive.getFilePaths())
         );
     }
 }

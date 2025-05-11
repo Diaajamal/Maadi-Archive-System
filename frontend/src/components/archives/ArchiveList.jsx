@@ -4,7 +4,7 @@ import { FaDownload, FaCalendarAlt, FaBuilding, FaFolder } from 'react-icons/fa'
 import { useArchives } from '../../context/ArchiveContext';
 
 const ArchiveList = () => {
-  const { archives, pagination, loading, error, changePage, downloadFile } = useArchives();
+  const { archives, pagination, loading, error, changePage, downloadFile, departments } = useArchives();
 
   const handleDownload = (filePath) => {
     // Extract filename from path
@@ -81,14 +81,8 @@ const ArchiveList = () => {
                   </span>
                 </td>
                 <td>
-                  <span className={`badge ${archive.department?.isInternal ? 'badge-primary' : 'badge-secondary'}`}>
-                    {(() => {
-                      if (!archive.department) return 'خارجي';
-                      if (typeof archive.department === 'object') {
-                        return archive.department.isInternal ? 'داخلي' : 'خارجي';
-                      }
-                      return 'خارجي';
-                    })()}
+                  <span className={`badge ${archive.isInternal ? 'badge-primary' : 'badge-secondary'}`}>
+                    {archive.isInternal ? 'داخلي' : 'خارجي'}
                   </span>
                 </td>
                 <td>
