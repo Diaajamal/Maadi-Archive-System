@@ -98,12 +98,17 @@ A comprehensive archive management system for Maadi, built with Spring Boot and 
 
 The application exposes the following main endpoints:
 
-- `GET /api/archives` - List all archives
-- `POST /api/archives` - Create a new archive
-- `GET /api/archives/{id}` - Get archive details
-- `PUT /api/archives/{id}` - Update an archive
-- `DELETE /api/archives/{id}` - Delete an archive
-- `GET /api/departments` - List all departments
+### Archive Endpoints (`/api/v1/archive`)
+- `POST /api/v1/archive/add` - Create a new archive with file attachments
+- `GET /api/v1/archive/all` - List all archives with pagination and filtering
+- `GET /api/v1/archive/download` - Download an archive file
+
+### Department Endpoints (`/api/v1/department`)
+- `POST /api/v1/department/add` - Add a new department
+- `DELETE /api/v1/department/delete` - Delete a department
+- `GET /api/v1/department/getDepartment` - Get department by name
+- `GET /api/v1/department/departments` - Get all departments
+- `GET /api/v1/department/all` - Get all department names
 
 ## 📁 Project Structure
 
