@@ -138,14 +138,24 @@ maadi-archive-system/
 │   └── mvnw.cmd
 └── frontend/
     ├── src/
+    │   ├── assets/
     │   ├── components/
+    │   ├── context/
     │   ├── hooks/
     │   ├── pages/
     │   ├── services/
-    │   └── utils/
+    │   ├── utils/
+    │   ├── App.jsx
+    │   ├── main.jsx
+    │   └── index.css
     ├── public/
+    ├── dist/
+    ├── node_modules/
+    ├── index.html
     ├── package.json
-    └── vite.config.js
+    ├── package-lock.json
+    ├── vite.config.js
+    └── eslint.config.js
 ```
 
 ## 🔧 Configuration
@@ -197,4 +207,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 Diaa Jamal - diaa.jamall01@gmail.com
 
-Project Link: [https://github.com/yourusername/maadi-archive-system](https://github.com/yourusername/maadi-archive-system)
+Project Link: [https://github.com/Diaajamal/maadi-archive-system](https://github.com/Diaajamal/maadi-archive-system)
