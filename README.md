@@ -128,14 +128,6 @@ maadi-archive-system/
 │   │   │       ├── static/
 │   │   │       └── application.yaml
 │   │   └── test/
-│   ├── ArchiveFiles/
-│   ├── logs/
-│   ├── temp/
-│   ├── archive-files/
-│   ├── .mvn/
-│   ├── pom.xml
-│   ├── mvnw
-│   └── mvnw.cmd
 └── frontend/
     ├── src/
     │   ├── assets/
@@ -148,14 +140,6 @@ maadi-archive-system/
     │   ├── App.jsx
     │   ├── main.jsx
     │   └── index.css
-    ├── public/
-    ├── dist/
-    ├── node_modules/
-    ├── index.html
-    ├── package.json
-    ├── package-lock.json
-    ├── vite.config.js
-    └── eslint.config.js
 ```
 
 ## 🔧 Configuration
