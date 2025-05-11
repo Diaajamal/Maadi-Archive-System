@@ -119,15 +119,23 @@ maadi-archive-system/
 │   │   ├── main/
 │   │   │   ├── java/
 │   │   │   │   └── com/maadinzm/archive/
+│   │   │   │       ├── archive/
 │   │   │   │       ├── config/
-│   │   │   │       ├── controllers/
+│   │   │   │       ├── department/
 │   │   │   │       ├── dtos/
-│   │   │   │       ├── entities/
-│   │   │   │       ├── repositories/
-│   │   │   │       └── services/
+│   │   │   │       └── ArchiveApplication.java
 │   │   │   └── resources/
+│   │   │       ├── static/
+│   │   │       └── application.yaml
 │   │   └── test/
-│   └── pom.xml
+│   ├── ArchiveFiles/
+│   ├── logs/
+│   ├── temp/
+│   ├── archive-files/
+│   ├── .mvn/
+│   ├── pom.xml
+│   ├── mvnw
+│   └── mvnw.cmd
 └── frontend/
     ├── src/
     │   ├── components/
@@ -136,7 +144,8 @@ maadi-archive-system/
     │   ├── services/
     │   └── utils/
     ├── public/
-    └── package.json
+    ├── package.json
+    └── vite.config.js
 ```
 
 ## 🔧 Configuration
